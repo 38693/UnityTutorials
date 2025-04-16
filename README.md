@@ -1,16 +1,15 @@
 Tutorials 1-2
 
-
 Files
-AnimatePlayer.cs
-Link to AnimatePlayer.cs Script
 
+AnimatePlayer.cs
+[Link to AnimatePlayer.cs Script](https://github.com/38693/UnityTutorials/blob/main/Assets/Scripts/Animatie.cs)
 
 MoveBasic.cs
 Link to MoveBasic.cs Script
 
-
 GIF 
+
 
 Tutorial 3
 
