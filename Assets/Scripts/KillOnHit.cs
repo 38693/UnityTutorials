@@ -6,8 +6,10 @@ using UnityEngine;
  public class KillOnHit : MonoBehaviour
  {
      public string targetTag;    
-     public GameObject effect; 
+    // public GameObject effect; 
      private AudioSource audioSource; 
+
+     private Hearts heartsScript;
  
      void Start()
      {
@@ -15,28 +17,39 @@ using UnityEngine;
      }
  
      private void OnCollisionEnter(Collision coll)
-     {
-         CheckCollision(coll.gameObject);
-     }
- 
-     private void OnTriggerEnter(Collider coll)
-     {
-         CheckCollision(coll.gameObject);
-     }
- 
-     private void CheckCollision(GameObject collidedObject)
-     {
-         if (collidedObject.CompareTag(targetTag))
-         {
-             //GameObject expl = Instantiate(effect, transform.position, Quaternion.identity);
-             //Destroy(expl, 2f); 
- 
-             Destroy(collidedObject, 0.1f);  
-             if (audioSource != null)
-             {
-                 audioSource.Play();
-             }
-             Destroy(gameObject, 0.1f);
-         }
-     }
+    {
+        handleHit(coll.gameObject);
+    }
+    private void OnTriggerEnter(Collider coll)
+    {
+        handleHit(coll.gameObject);
+    }
+    private void handleHit(GameObject other) {
+        if (other.tag == targetTag)
+        {
+           // GameObject expl = Instantiate(effect);
+           // expl.transform.position = other.transform.position;
+           // Destroy(expl, 2f);
+            if (targetTag == "Player")
+            {
+                if (heartsScript == null)
+                {
+                    heartsScript = FindObjectOfType<Hearts>();
+                }
+                
+                heartsScript.Lives--;
+                if (heartsScript.Lives == 0)
+                {
+                    Destroy(other, 0.1f);
+                }
+            }
+            else {
+                Destroy(other, 0.1f);
+            }
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+        }
+    }
  }

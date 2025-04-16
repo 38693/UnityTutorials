@@ -33,23 +33,30 @@ public class Hearts : MonoBehaviour
         maxLives = hearts.Length;
     }
 
-    public int Lives
-    {
+    public int Lives{
         get { return lives; }
-        set
-        {
+        set {
             if (value <= maxLives && value >= 0)
             {
                 lives = value;
                 for (int i = 0; i < hearts.Length; i++)
                 {
-                    hearts[i].enabled = (i < lives);
+                    if (i < lives)
+                    {
+                        hearts[i].enabled = true;
+                    }
+                    else
+                    {
+                        hearts[i].enabled = false;
+                    }
                 }
-
-                //if (lives == 0) pauseGame();
+                if(lives == 0)pauseGame();
             }
+
         }
     }
+
+
 
     private void pauseGame()
     {
